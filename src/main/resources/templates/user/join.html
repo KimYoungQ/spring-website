@@ -44,37 +44,74 @@
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
-                <form th:action="@{/join}" th:object="${userForm}" method="post">
+                <form class="needs-validation" th:action="@{/join}" th:object="${userForm}" method="post" novalidate>
                     <div class="form-group mb-4">
-                        <label for="user_id" class="form-label" >아이디</label>
-                        <input type="text" class="form-control" id="user_id" th:field="*{id}" placeholder="아이디">
-                        <small id="idHelp" class="form-text text-muted">
-                            5~20자의 영소문자, 숫자와 특수기호(_)(-)만 사용가능합니다.
-                        </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Id Error</small>
+                        <div class="form-group">
+                            <label for="id">아이디</label>
+                            <input id="id" type="text" th:field="*{id}" class="form-control"
+                                   placeholder="아이디" aria-describedby="idHelp" required minlength="3" maxlength="20">
+                            <small id="idHelp" class="form-text text-muted">
+                                3~20자의 영문 소문자, 한글 숫자만 가능합니다.
+                            </small>
+                            <small class="invalid-feedback">ID을 다시 입력하세요.</small>
+                            <div class="form-text text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Id Error</div>
+                        </div>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="user_password" class="form-label">비밀번호</label>
-                        <input type="password" class="form-control" id="user_password"  th:field="*{password}" placeholder="비밀번호">
+                        <label for="user_password">비밀번호</label>
+                        <input id="user_password" type="password" th:field="*{password}" class="form-control"
+                               placeholder="아이디" aria-describedby="password1Help" required minlength="8" maxlength="16">
                         <small id="password1Help" class="form-text text-muted">
                             8~16자의 영문 대 소문자, 숫자만 사용가능합니다.
                         </small>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</small>
+                        <small class="invalid-feedback">비밀번호를 다시 입력하세요.</small>
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="user_password_confirm" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="user_password_confirm" th:field="*{passwordConfirm}" placeholder="비밀번호를 다시 입력해주세요.">
+                        <label for="user_password_confirm">비밀번호 확인</label>
+                        <input id="user_password_confirm" type="password" th:field="*{passwordConfirm}" class="form-control"
+                               placeholder="아이디" aria-describedby="password2Help" required minlength="8" maxlength="16">
+                        <small id="password2Help" class="form-text text-muted">
+                            8~16자의 영문 대 소문자, 숫자만 사용가능합니다.
+                        </small>
+                        <small class="invalid-feedback">비밀번호를 다시 입력하세요.</small>
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Password Error</div>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="user_name" class="form-label">이름</label>
-                        <input type="text" class="form-control" id="user_name" th:field="*{name}" placeholder="이름">
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</small>
+                        <label for="user_name">이름</label>
+                        <input id="user_name" type="text" th:field="*{name}" class="form-control"
+                               placeholder="아이디" aria-describedby="nameHelp" required minlength="1" maxlength="20">
+                        <small class="invalid-feedback">이름을 다시 입력하세요.</small>
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
                     </div>
 
                     <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">가입 하기</button>
+
                 </form>
             </div>
     </div>
+    <script type="application/javascript">
+        (function () {
+        'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                  form.classList.add('was-validated')
+                }, false)
+             })
+        })()
+    </script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
