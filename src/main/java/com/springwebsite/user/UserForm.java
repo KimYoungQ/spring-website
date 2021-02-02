@@ -16,14 +16,14 @@ public class UserForm {
     private String id;
 
     @Length(min = 8, max = 16)
-    @Pattern(regexp = "^[a-zA-Z0-9]{3,20}$", message = "다시 입력해주세요")
+    @Pattern(regexp = "^[a-zA-Z0-9]{8,16}$", message = "다시 입력해주세요")
     private String password;
 
     @Length(min = 8, max = 16)
-    @Pattern(regexp = "^[a-zA-Z0-9]{3,20}$")
+    @Pattern(regexp = "^[a-zA-Z0-9]{8,16}$")
     private String passwordConfirm;
 
     @Length(min = 1, max = 20)
-    @Pattern(regexp = "^[가-힣a-zA-Z]{1,20}$" ,message = "다시 입력해주세요")
+    @Pattern(regexp = "^[가-힣a-zA-Z]{1,20}$" ,message = "1~20자 영어 대소문자, 한글만 가능합니다.")
     private String name;
 }
