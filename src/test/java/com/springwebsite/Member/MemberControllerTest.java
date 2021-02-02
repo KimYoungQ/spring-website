@@ -1,4 +1,4 @@
-package com.springwebsite.user;
+package com.springwebsite.Member;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {
+class MemberControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
@@ -26,8 +26,8 @@ class UserControllerTest {
         mockMvc.perform(get("/join"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("user/join"))
-                .andExpect(model().attributeExists("userForm"));
+                .andExpect(view().name("member/join"))
+                .andExpect(model().attributeExists("member"));
     }
 
     @DisplayName("회원 가입 처리 - 입력값 오류")
@@ -40,7 +40,7 @@ class UserControllerTest {
                 .param("name", "이름")
                 .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("user/join"));
+                .andExpect(view().name("member/join"));
     }
 
     @DisplayName("회원 가입 처리 - 입력값 정상")
@@ -55,4 +55,6 @@ class UserControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
     }
+
+
 }

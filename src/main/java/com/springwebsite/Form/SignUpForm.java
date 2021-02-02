@@ -1,15 +1,14 @@
-package com.springwebsite.user;
+package com.springwebsite.Form;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
-public class UserForm {
+public class SignUpForm {
 
     @Length(min = 3, max = 20)
     @Pattern(regexp = "^[a-z0-9_-]{3,20}$" , message = "다시 입력해주세요")

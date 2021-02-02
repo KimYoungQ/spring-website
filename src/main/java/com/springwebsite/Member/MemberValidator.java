@@ -1,18 +1,18 @@
-package com.springwebsite.user;
+package com.springwebsite.Member;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class UserFormValidator implements Validator {
+public class MemberValidator implements Validator {
 
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return UserForm.class.isAssignableFrom(aClass);
+        return Member.class.isAssignableFrom(aClass);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        UserForm userForm = (UserForm) o;
+        Member member = (Member) o;
     }
 }
