@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">자유게시판</a>
+                    <a class="nav-link active" aria-current="page" th:href="/board">자유게시판</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">구직게시판</a>
@@ -31,15 +31,16 @@
                 </li>
             </ul>
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link fw-bolder" href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()">로그인</a>
-                </li>
-                <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
-                    <button class="dropdown-item" type="submit">로그아웃</button>
+                    <form class="form-inline px-2 " action="#" th:action="@{/join}" method="post" sec:authorize="!isAuthenticated()">
+                    <button class="btn btn-outline-dark" type="submit">회원가입</button>
                 </form>
-                <li class="nav-item">
-                    <a class="nav-link fw-bolder" href="#" th:href="@{/join}">가입</a>
-                </li>
+                <form class="form-inline px-2" action="#" th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
+                    <button class="btn btn-outline-dark" type="submit">로그인</button>
+                </form>
+                <form class="d-flex" action="#" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                    <button class="btn btn-outline-dark" type="submit">로그아웃</button>
+                </form>
+
             </ul>
         </div>
     </div>
