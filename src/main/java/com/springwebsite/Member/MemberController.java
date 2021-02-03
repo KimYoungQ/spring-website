@@ -29,8 +29,13 @@ public class MemberController {
             return "member/join";
         }
 
-        memberService.createNewMember(signUpForm);
+        Member newMember = memberService.createNewMember(signUpForm);
+        memberService.login(newMember);
         return "redirect:/";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
 }

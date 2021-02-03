@@ -1,5 +1,6 @@
 package com.springwebsite.Member;
 
+import com.springwebsite.Form.SignUpForm;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -19,6 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MemberControllerTest {
 
     @Autowired private MockMvc mockMvc;
+
+    @Autowired private MemberService memberService;
 
     @DisplayName("회원 가입 뷰 작동")
     @Test
@@ -56,5 +61,22 @@ class MemberControllerTest {
                 .andExpect(view().name("redirect:/"));
     }
 
+    @Test
+    @Transactional
+    void login() throws Exception {
+        SignUpForm signUpForm = new SignUpForm();
+        signUpForm.setId("tes1");
+        signUpForm.setPassword("123123123");
+        signUpForm.setName("12345678");
+        memberService.createNewMember(signUpForm);
+
+        mockMvc.perform(post("/login")
+                .param("id", "tes1")
+                .param("password", "123123123")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"))
+                .andExpect(authenticated().withUsername("tes1"));
+    }
 
 }
