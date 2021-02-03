@@ -17,24 +17,19 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="/board">자유게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">구직게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">음악게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">스포츠게시판</a>
-                </li>
+                <th:block th:each="navBoard : ${#request.getAttribute('navBoardList')}">
+                    <li class="nav-item">
+                        <a th:href="@{/board/main(board_info_idx=${navBoard.board_info_idx})}" class="nav-link">
+                            <th:block th:text="${navBoard.board_info_name}"></th:block>
+                        </a>
+                    </li>
+                </th:block>
             </ul>
             <ul class="navbar-nav justify-content-end">
-                    <form class="form-inline px-2 " action="#" th:action="@{/join}" method="post" sec:authorize="!isAuthenticated()">
+                    <form class="form-inline px-2 " th:action="@{/join}" method="get" sec:authorize="!isAuthenticated()">
                     <button class="btn btn-outline-dark" type="submit">회원가입</button>
                 </form>
-                <form class="form-inline px-2" action="#" th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
+                <form class="form-inline px-2" th:action="@{/login}" method="get" sec:authorize="!isAuthenticated()">
                     <button class="btn btn-outline-dark" type="submit">로그인</button>
                 </form>
                 <form class="d-flex" action="#" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
