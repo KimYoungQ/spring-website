@@ -1,6 +1,7 @@
 package com.springwebsite.Mapper;
 
 import com.springwebsite.Member.Member;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -16,4 +17,7 @@ public interface MemberMapper {
     @Insert("Insert into member_table (member_idx, id, password, name, role) " +
             "values (member_seq.nextval, #{id}, #{password}, #{name}, #{role})")
     void save(Member newMember);
+
+    @Delete("delete from member_table")
+    void deleteAll();
 }

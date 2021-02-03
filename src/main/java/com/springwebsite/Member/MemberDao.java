@@ -17,4 +17,8 @@ public class MemberDao {
     public Member findById(String id) {
         return memberMapper.findById(id);
     }
+
+    public void deleteAll() {
+        memberMapper.deleteAll();
+    }
 }

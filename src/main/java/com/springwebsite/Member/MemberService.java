@@ -57,4 +57,7 @@ public class MemberService implements UserDetailsService {
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 
+    public void deleteAll() {
+        memberDao.deleteAll();
+    }
 }

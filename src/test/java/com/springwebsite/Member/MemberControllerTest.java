@@ -1,6 +1,8 @@
 package com.springwebsite.Member;
 
 import com.springwebsite.Form.SignUpForm;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,6 +28,22 @@ class MemberControllerTest {
 
     @Autowired private MemberService memberService;
 
+
+    @BeforeEach
+    void beforeEach() {
+        SignUpForm signUpForm = new SignUpForm();
+        signUpForm.setId("testID");
+        signUpForm.setPassword("123123123");
+        signUpForm.setName("apple");
+        memberService.createNewMember(signUpForm);
+    }
+
+    @AfterEach
+    void afterEach() {
+        memberService.deleteAll();
+    }
+
+
     @DisplayName("회원 가입 뷰 작동")
     @Test
     void signUpView() throws Exception {
@@ -32,7 +51,8 @@ class MemberControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("member/join"))
-                .andExpect(model().attributeExists("member"));
+                .andExpect(model().attributeExists("signUpForm"))
+                .andExpect(unauthenticated());
     }
 
     @DisplayName("회원 가입 처리 - 입력값 오류")
@@ -45,7 +65,8 @@ class MemberControllerTest {
                 .param("name", "이름")
                 .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("member/join"));
+                .andExpect(view().name("member/join"))
+                .andExpect(unauthenticated());
     }
 
     @DisplayName("회원 가입 처리 - 입력값 정상")
@@ -58,25 +79,43 @@ class MemberControllerTest {
                 .param("name", "이름")
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/"));
+                .andExpect(view().name("redirect:/"))
+                .andExpect(authenticated());
     }
 
+    @DisplayName("로그인")
     @Test
-    @Transactional
-    void login() throws Exception {
-        SignUpForm signUpForm = new SignUpForm();
-        signUpForm.setId("tes1");
-        signUpForm.setPassword("123123123");
-        signUpForm.setName("12345678");
-        memberService.createNewMember(signUpForm);
-
+    void login_correct_input() throws Exception {
         mockMvc.perform(post("/login")
-                .param("id", "tes1")
-                .param("password", "123123123")
+               .param("id", "testID")
+                .param("password","123123123")
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"))
-                .andExpect(authenticated().withUsername("tes1"));
+                .andExpect(authenticated());
+    }
+
+    @DisplayName("로그인 실패")
+    @Test
+    void login_wrong_input() throws Exception {
+        mockMvc.perform(post("/login")
+                .param("id", "notexist")
+                .param("password","1123123123")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/login?error"))
+                .andExpect(unauthenticated());
+
+    }
+
+    @DisplayName("로그아웃")
+    @Test
+    void logout() throws Exception {
+        mockMvc.perform(post("/logout")
+               .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"))
+                .andExpect(unauthenticated());
     }
 
 }
