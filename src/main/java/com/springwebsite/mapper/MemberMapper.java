@@ -1,6 +1,6 @@
-package com.springwebsite.Mapper;
+package com.springwebsite.mapper;
 
-import com.springwebsite.Member.Member;
+import com.springwebsite.member.Member;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +20,7 @@ public interface MemberMapper {
 
     @Delete("delete from member_table")
     void deleteAll();
+
+    @Select("select member_idx from member_table where id=#{id}")
+    int findMemberIndexById(String id);
 }

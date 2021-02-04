@@ -1,4 +1,4 @@
-package com.springwebsite.NavMenu;
+package com.springwebsite.navMenu;
 
 import com.springwebsite.board.Board;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.springwebsite.Form;
+package com.springwebsite.form;
 
 import lombok.Getter;
 import lombok.Setter;

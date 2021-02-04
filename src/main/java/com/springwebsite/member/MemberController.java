@@ -1,6 +1,6 @@
-package com.springwebsite.Member;
+package com.springwebsite.member;
 
-import com.springwebsite.Form.SignUpForm;
+import com.springwebsite.form.SignUpForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
-package com.springwebsite.NavMenu;
+package com.springwebsite.navMenu;
 
-import com.springwebsite.Mapper.NavMenuMapper;
+import com.springwebsite.mapper.NavMenuMapper;
 import com.springwebsite.board.Board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

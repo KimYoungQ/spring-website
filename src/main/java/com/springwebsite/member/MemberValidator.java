@@ -1,4 +1,4 @@
-package com.springwebsite.Member;
+package com.springwebsite.member;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

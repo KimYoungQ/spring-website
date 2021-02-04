@@ -1,7 +1,7 @@
 package com.springwebsite.config;
 
 import com.springwebsite.Interceptor.NavMenuInterceptor;
-import com.springwebsite.NavMenu.NavMenuService;
+import com.springwebsite.navMenu.NavMenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

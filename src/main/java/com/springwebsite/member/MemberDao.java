@@ -1,6 +1,6 @@
-package com.springwebsite.Member;
+package com.springwebsite.member;
 
-import com.springwebsite.Mapper.MemberMapper;
+import com.springwebsite.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -21,4 +21,9 @@ public class MemberDao {
     public void deleteAll() {
         memberMapper.deleteAll();
     }
+
+    public int findMemberIndexById(String id) {
+        return memberMapper.findMemberIndexById(id);
+    }
 }
+

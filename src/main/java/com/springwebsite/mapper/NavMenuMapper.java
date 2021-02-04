@@ -1,4 +1,4 @@
-package com.springwebsite.Mapper;
+package com.springwebsite.mapper;
 
 import com.springwebsite.board.Board;
 import org.apache.ibatis.annotations.Mapper;

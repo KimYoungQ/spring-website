@@ -1,10 +1,9 @@
 package com.springwebsite.Interceptor;
 
-import com.springwebsite.NavMenu.NavMenuService;
+import com.springwebsite.navMenu.NavMenuService;
 import com.springwebsite.board.Board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
