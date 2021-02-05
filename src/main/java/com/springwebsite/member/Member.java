@@ -20,4 +20,9 @@ public class Member {
     private String name;
 
     private String role;
+
+    public Member(String id, String password) {
+        this.id = id;
+        this.password =password;
+    }
 }

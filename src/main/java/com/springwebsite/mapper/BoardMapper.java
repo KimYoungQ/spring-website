@@ -1,10 +1,7 @@
 package com.springwebsite.mapper;
 
 import com.springwebsite.board.Content;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface BoardMapper {
@@ -22,32 +19,22 @@ public interface BoardMapper {
             "      and content_idx = #{content_idx}")
     Content getContentInfo(int content_idx);
 
-//------------------------------------------  게시판 주제 별 게시글 등록 --------------------------------------------------//
-    @SelectKey(statement = "select content_seq.nextval from dual", keyProperty = "content_idx", before = true, resultType = int.class)
-    @Insert("insert into content_table(content_idx, content_subject, content_text, " +
-            "       content_file, content_writer_idx, content_board_idx, content_date, content_generalBoard_idx) " +
-            "values (#{content_idx}, #{content_subject}, #{content_text}, " +
-            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate, generalboard_seq.nextval)")
-    void addGeneralContentInfo(Content content);
+    @Update("update content_table " +
+            "set content_subject = #{content_subject}, content_text = #{content_text}, " +
+            "content_file = #{content_file, jdbcType=VARCHAR} " +
+            "where content_idx = #{content_idx}")
+    void modifyContentInfo(Content content);
 
     @SelectKey(statement = "select content_seq.nextval from dual", keyProperty = "content_idx", before = true, resultType = int.class)
     @Insert("insert into content_table(content_idx, content_subject, content_text, " +
-            "       content_file, content_writer_idx, content_board_idx, content_date, content_generalBoard_idx) " +
+            "       content_file, content_writer_idx, content_board_idx, content_date) " +
             "values (#{content_idx}, #{content_subject}, #{content_text}, " +
-            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate, jobboard_seq.nextval)")
-    void addJobContentInfo(Content content);
+            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, to_date(sysdate,'yyyy-mm-dd hh24:mi:ss'))")
+    void addContentInfo(Content content);
 
-    @SelectKey(statement = "select content_seq.nextval from dual", keyProperty = "content_idx", before = true, resultType = int.class)
-    @Insert("insert into content_table(content_idx, content_subject, content_text, " +
-            "       content_file, content_writer_idx, content_board_idx, content_date, content_generalBoard_idx) " +
-            "values (#{content_idx}, #{content_subject}, #{content_text}, " +
-            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate, musicboard_seq.nextval)")
-    void addMusicContentInfo(Content content);
+    @Delete("delete from content_table")
+    void deleteAll();
 
-    @SelectKey(statement = "select content_seq.nextval from dual", keyProperty = "content_idx", before = true, resultType = int.class)
-    @Insert("insert into content_table(content_idx, content_subject, content_text, " +
-            "       content_file, content_writer_idx, content_board_idx, content_date, content_generalBoard_idx) " +
-            "values (#{content_idx}, #{content_subject}, #{content_text}, " +
-            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate, sportboard_seq.nextval)")
-    void addsportContentInfo(Content content);
+    @Select("select content_idx from content_table where content_date = #{content_date}")
+    int findContentIdxbyContentDate(String content_date);
 }

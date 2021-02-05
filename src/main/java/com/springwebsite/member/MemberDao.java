@@ -25,5 +25,6 @@ public class MemberDao {
     public int findMemberIndexById(String id) {
         return memberMapper.findMemberIndexById(id);
     }
+
 }
 

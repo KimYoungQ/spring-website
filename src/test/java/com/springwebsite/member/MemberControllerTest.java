@@ -8,7 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.TestExecutionEvent;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -21,27 +26,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class MemberControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
-    @Autowired private MemberService memberService;
+    @Autowired
+    private MemberDao memberDao;
 
-
-    @BeforeEach
-    void beforeEach() {
-        SignUpForm signUpForm = new SignUpForm();
-        signUpForm.setId("testID");
-        signUpForm.setPassword("123123123");
-        signUpForm.setName("apple");
-        memberService.createNewMember(signUpForm);
-    }
-
-    @AfterEach
-    void afterEach() {
-        memberService.deleteAll();
-    }
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @DisplayName("회원 가입 뷰 작동")
     @Test
@@ -85,9 +79,20 @@ class MemberControllerTest {
     @DisplayName("로그인")
     @Test
     void login_correct_input() throws Exception {
+        String id = "testID";
+        String password = "123123123";
+        Member member = Member.builder()
+                .id(id)
+                .password(passwordEncoder.encode(password))
+                .role("ROLE_USER")
+                .name("테스트용")
+                .build();
+
+        memberDao.save(member);
+
         mockMvc.perform(post("/login")
-               .param("id", "testID")
-                .param("password","123123123")
+               .param("id", id)
+                .param("password", password)
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"))
@@ -97,8 +102,19 @@ class MemberControllerTest {
     @DisplayName("로그인 실패")
     @Test
     void login_wrong_input() throws Exception {
+        String id = "testID";
+        String password = "123123123";
+        Member member = Member.builder()
+                .id(id)
+                .password(passwordEncoder.encode(password))
+                .role("ROLE_USER")
+                .name("테스트용")
+                .build();
+
+        memberDao.save(member);
+
         mockMvc.perform(post("/login")
-                .param("id", "notexist")
+                .param("id", "testID")
                 .param("password","1123123123")
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection())

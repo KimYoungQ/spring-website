@@ -39,6 +39,8 @@ public class BoardController {
         model.addAttribute("board_info_idx", board_info_idx);
         model.addAttribute("content_idx", content_idx);
 
+        Content content = boardService.getContentInfo(content_idx);
+        model.addAttribute("content", content);
 
         return "/board/read";
     }
@@ -68,6 +70,39 @@ public class BoardController {
         attributes.addAttribute("board_info_idx", board_info_idx);
         attributes.addAttribute("content_idx", content.getContent_idx());
 
+        return "redirect:/board/read";
+    }
+
+    @GetMapping("/modify")
+    public String modify(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx,
+                         @ModelAttribute Content content) {
+
+        model.addAttribute("board_info_idx", board_info_idx);
+        model.addAttribute("content_idx", content_idx);
+
+        Content contentInfo = boardService.getContentInfo(content_idx);
+        model.addAttribute("content", contentInfo);
+
+        return "/board/modify";
+    }
+
+    @PostMapping("/modify")
+    public String modify(@Valid @ModelAttribute Content content, Errors errors,
+                         RedirectAttributes attributes,
+                         @RequestParam int board_info_idx, @RequestParam int content_idx,
+                         Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("board_info_idx", board_info_idx);
+            model.addAttribute("content_idx", content_idx);
+            model.addAttribute("content", content);
+            return "/board/modify";
+        }
+
+        content.setContent_board_idx(board_info_idx);
+        attributes.addAttribute("board_info_idx", board_info_idx);
+        attributes.addAttribute("content_idx", content_idx);
+
+        boardService.modifyContentInfo(content);
         return "redirect:/board/read";
     }
 }

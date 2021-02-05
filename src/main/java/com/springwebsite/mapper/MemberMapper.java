@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface MemberMapper {
 
-    @Select("select id, password, role " +
+    @Select("select member_idx, id, password, role, name " +
             "from member_table " +
             "where id=#{id}")
     Member findById(String id);
