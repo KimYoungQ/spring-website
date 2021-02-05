@@ -3,6 +3,8 @@ package com.springwebsite.mapper;
 import com.springwebsite.board.Content;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface BoardMapper {
 
@@ -12,7 +14,7 @@ public interface BoardMapper {
     String getBoardInfoName(int board_info_idx);
 
     @Select("select a2.name as content_writer_name, " +
-            "       to_char(a1.content_date, 'YYYY-MM-DD') as content_date, " +
+            "       to_char(a1.content_date, 'yyyy-mm-dd hh24:mi:ss') as content_date, " +
             "       a1.content_subject, a1.content_text, a1.content_file, a1.content_writer_idx " +
             "from content_table a1, member_table a2 " +
             "where a1.content_writer_idx = a2.member_idx " +
@@ -37,4 +39,15 @@ public interface BoardMapper {
 
     @Select("select content_idx from content_table where content_date = #{content_date}")
     int findContentIdxbyContentDate(String content_date);
+
+    @Select("select a1.content_idx, a1.content_subject, a2.name as content_writer_name, " +
+            "       to_char(a1.content_date, 'YYYY-MM-DD hh24:mi:ss') as content_date " +
+            "from content_table a1, member_table a2 " +
+            "where a1.content_writer_idx = a2.member_idx " +
+            "       and a1.content_board_idx = #{board_info_idx} " +
+            "order by a1.content_idx desc")
+    List<Content> getContentList(int board_info_idx);
+
+    @Delete("delete from content_table where content_idx = #{content_idx}")
+    void deleteContentInfo(int content_idx);
 }

@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.model.IModel;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,6 +31,9 @@ public class BoardController {
 
         String boardInfoName = boardService.getBoardInfoName(board_info_idx);
         model.addAttribute("boardInfoName", boardInfoName);
+
+        List<Content> contentList = boardService.getContentList(board_info_idx);
+        model.addAttribute("contentList", contentList);
 
         return "/board/main";
     }
@@ -104,5 +109,20 @@ public class BoardController {
 
         boardService.modifyContentInfo(content);
         return "redirect:/board/read";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam int board_info_idx, @RequestParam int content_idx,
+                         @ModelAttribute Content content,
+                         Model model,
+                         RedirectAttributes attributes) {
+        model.addAttribute(content);
+        model.addAttribute("board_info_idx", board_info_idx);
+        model.addAttribute("content_idx", content_idx);
+        boardService.deleteContentInfo(content_idx);
+
+        attributes.addAttribute("board_info_idx", board_info_idx);
+
+        return "/board/main";
     }
 }

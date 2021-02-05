@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.security.Principal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -70,5 +71,13 @@ public class BoardService {
 
     int findContentIdxbyContentDate(String content_date) {
         return boardDao.findContentIdxbyContentDate(content_date);
+    }
+
+    public List<Content> getContentList(int board_info_idx) {
+        return boardDao.getContentList(board_info_idx);
+    }
+
+    public void deleteContentInfo(int content_idx) {
+        boardDao.deleteContentInfo(content_idx);
     }
 }

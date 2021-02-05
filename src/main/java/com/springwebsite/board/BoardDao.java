@@ -4,6 +4,8 @@ import com.springwebsite.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class BoardDao {
@@ -28,5 +30,13 @@ public class BoardDao {
 
     public int findContentIdxbyContentDate(String content_date) {
         return boardMapper.findContentIdxbyContentDate(content_date);
+    }
+
+    public List<Content> getContentList(int board_info_idx) {
+        return boardMapper.getContentList(board_info_idx);
+    }
+
+    public void deleteContentInfo(int content_idx) {
+        boardMapper.deleteContentInfo(content_idx);
     }
 }

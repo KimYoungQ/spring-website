@@ -36,10 +36,10 @@
                             <img th:src="@{'/images/' + ${content.content_file}}" width="100%"/>
                         </div>
                         <div class="form-group py-2">
-                            <div class="text-right">
-                                <a th:href="@{/board/main(board_info_idx=${board_info_idx})}" class="btn btn-primary">목록보기</a>
-                                <a th:href="@{/board/modify(board_info_idx=${board_info_idx},content_idx=${content_idx})}" class="btn btn-info" sec:authorize="isAuthenticated()">수정하기</a>
-                                <a th:href="@{/board/delete(board_info_idx=${board_info_idx},content_idx=${content_idx})}" class="btn btn-danger" sec:authorize="isAuthenticated()">삭제하기</a>
+                            <div class="text-right gap-2 d-md-flex justify-content-md-end">
+                                <a th:href="@{/board/main(board_info_idx=${board_info_idx})}" class="btn btn-outline-secondary me-md-1">목록보기</a>
+                                <a th:href="@{/board/modify(board_info_idx=${board_info_idx},content_idx=${content_idx})}" class="btn btn-outline-primary me-md-1" sec:authorize="isAuthenticated()">수정하기</a>
+                                <a th:href="@{/board/delete(board_info_idx=${board_info_idx},content_idx=${content_idx})}" class="btn btn-outline-danger me-md-1" sec:authorize="isAuthenticated()">삭제하기</a>
                             </div>
                         </div>
                     </div>
