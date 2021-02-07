@@ -29,10 +29,6 @@ public class BoardDao {
         boardMapper.modifyContentInfo(content);
     }
 
-    public int findContentIdxbyContentDate(String content_date) {
-        return boardMapper.findContentIdxbyContentDate(content_date);
-    }
-
     public List<Content> getContentList(int board_info_idx, RowBounds rowBounds) {
         return boardMapper.getContentList(board_info_idx, rowBounds);
     }

@@ -38,9 +38,6 @@ public interface BoardMapper {
     @Delete("delete from content_table")
     void deleteAll();
 
-    @Select("select content_idx from content_table where content_date = #{content_date}")
-    int findContentIdxbyContentDate(String content_date);
-
     @Select("select a1.content_idx, a1.content_subject, a2.name as content_writer_name, " +
             "       to_char(a1.content_date, 'YYYY-MM-DD hh24:mi:ss') as content_date " +
             "from content_table a1, member_table a2 " +

@@ -56,7 +56,7 @@ public class MemberService implements UserDetailsService {
         memberDao.deleteAll();
     }
 
-    public int findMemberIndexById(String id) {
-        return memberDao.findMemberIndexById(id);
+    public Member findById(String id) {
+        return memberDao.findById(id);
     }
 }

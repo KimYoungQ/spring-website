@@ -21,10 +21,5 @@ public class MemberDao {
     public void deleteAll() {
         memberMapper.deleteAll();
     }
-
-    public int findMemberIndexById(String id) {
-        return memberMapper.findMemberIndexById(id);
-    }
-
 }
 

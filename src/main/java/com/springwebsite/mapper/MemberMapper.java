@@ -21,6 +21,4 @@ public interface MemberMapper {
     @Delete("delete from member_table")
     void deleteAll();
 
-    @Select("select member_idx from member_table where id=#{id}")
-    int findMemberIndexById(String id);
 }

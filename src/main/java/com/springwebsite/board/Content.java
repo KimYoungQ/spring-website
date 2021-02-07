@@ -1,6 +1,7 @@
 package com.springwebsite.board;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;

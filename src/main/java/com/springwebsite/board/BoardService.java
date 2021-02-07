@@ -1,10 +1,12 @@
 package com.springwebsite.board;
 
+import com.springwebsite.member.Member;
 import com.springwebsite.member.MemberDao;
 import com.springwebsite.setting.Paging;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,7 +59,10 @@ public class BoardService {
     private Content addContentFile(Content content) {
         MultipartFile upload_file = content.getUpload_file();
 
-        if (upload_file.getSize() > 0) {
+        if (upload_file == null) {
+            return content;         // test 코드 NullPointException 방지
+        }
+        else if (upload_file.getSize() > 0) {
             String file_name = saveUploadFile(upload_file);
             content.setContent_file(file_name);
         }
@@ -66,7 +71,8 @@ public class BoardService {
     }
 
     private Content addContentWriterIndex(Content content, String memberId) {
-        int member_idx = memberDao.findMemberIndexById(memberId);
+        Member member = memberDao.findById(memberId);
+        int member_idx = member.getMember_idx();
         content.setContent_writer_idx(member_idx);
         return content;
     }
@@ -77,10 +83,6 @@ public class BoardService {
 
     public void modifyContentInfo(Content content) {
         boardDao.modifyContentInfo(content);
-    }
-
-    int findContentIdxbyContentDate(String content_date) {
-        return boardDao.findContentIdxbyContentDate(content_date);
     }
 
     public List<Content> getContentList(int board_info_idx, int page) {
