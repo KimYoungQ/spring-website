@@ -25,15 +25,15 @@
                 <tbody>
                 <th:block th:each="content : ${contentList}">
                     <tr>
-                        <td>
-                            <a class="link-secondary" th:href='@{/board/read(board_info_idx=${board_info_idx}, content_idx=${content.content_idx}, page=${page})}'>
-                                <p class="text-center" th:text="${content.content_subject}"></p>
+                        <td class="text-center">
+                            <a class="link-secondary text-center" th:href='@{/board/read(board_info_idx=${board_info_idx}, content_idx=${content.content_idx}, page=${page})}'>
+                                <th:block th:text="${content.content_subject}"></th:block>
                             </a>
                         </td>
-                        <td class="text-center d-none d-md-table-cell">
+                        <td class="text-center">
                             <th:block th:text="${content.content_writer_name}"></th:block>
                         </td>
-                        <td class="text-center d-none d-md-table-cell">
+                        <td class="text-center">
                             <th:block th:text="${content.content_date}"></th:block>
                         </td>
                     </tr>
