@@ -3,6 +3,7 @@ package com.springwebsite.board;
 import com.springwebsite.member.Member;
 import com.springwebsite.member.UserMember;
 import com.springwebsite.navMenu.NavMenuService;
+import com.springwebsite.setting.Paging;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,24 +26,30 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/main")
-    public String main(Model model, @RequestParam int board_info_idx) {
+    public String main(Model model, @RequestParam int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page) {
 
         model.addAttribute("board_info_idx", board_info_idx);
 
         String boardInfoName = boardService.getBoardInfoName(board_info_idx);
         model.addAttribute("boardInfoName", boardInfoName);
 
-        List<Content> contentList = boardService.getContentList(board_info_idx);
+        List<Content> contentList = boardService.getContentList(board_info_idx, page);
         model.addAttribute("contentList", contentList);
+
+        Paging paging = boardService.getContentCount(board_info_idx, page);
+        model.addAttribute("paging", paging);
+
+        model.addAttribute("page", page);
 
         return "/board/main";
     }
 
     @GetMapping("/read")
-    public String read(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx) {
+    public String read(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page) {
 
         model.addAttribute("board_info_idx", board_info_idx);
         model.addAttribute("content_idx", content_idx);
+        model.addAttribute("page", page);
 
         Content content = boardService.getContentInfo(content_idx);
         model.addAttribute("content", content);
@@ -51,20 +58,22 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String write(Model model, @RequestParam int board_info_idx) {
+    public String write(Model model, @RequestParam int board_info_idx, @RequestParam int page) {
 
         model.addAttribute(new Content());
         model.addAttribute("board_info_idx", board_info_idx);
+        model.addAttribute("page", page);
         return "/board/write";
     }
 
     @PostMapping("/write")
     public String write(@Valid @ModelAttribute Content content, Errors errors,
-                        @RequestParam int board_info_idx, Model model,
+                        @RequestParam int board_info_idx, @RequestParam int page, Model model,
                         Principal principal,
                         RedirectAttributes attributes) {
         if(errors.hasErrors()) {
             model.addAttribute("board_info_idx", board_info_idx);
+            model.addAttribute("page", page);
             return "/board/write";
         }
 
@@ -74,16 +83,18 @@ public class BoardController {
         boardService.addContentInfo(content, memberId);
         attributes.addAttribute("board_info_idx", board_info_idx);
         attributes.addAttribute("content_idx", content.getContent_idx());
+        attributes.addAttribute("page", page);
 
         return "redirect:/board/read";
     }
 
     @GetMapping("/modify")
-    public String modify(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx,
+    public String modify(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page,
                          @ModelAttribute Content content) {
 
         model.addAttribute("board_info_idx", board_info_idx);
         model.addAttribute("content_idx", content_idx);
+        model.addAttribute("page", page);
 
         Content contentInfo = boardService.getContentInfo(content_idx);
         model.addAttribute("content", contentInfo);
@@ -94,11 +105,12 @@ public class BoardController {
     @PostMapping("/modify")
     public String modify(@Valid @ModelAttribute Content content, Errors errors,
                          RedirectAttributes attributes,
-                         @RequestParam int board_info_idx, @RequestParam int content_idx,
+                         @RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page,
                          Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("board_info_idx", board_info_idx);
             model.addAttribute("content_idx", content_idx);
+            model.addAttribute("page",  page);
             model.addAttribute("content", content);
             return "/board/modify";
         }
@@ -106,13 +118,14 @@ public class BoardController {
         content.setContent_board_idx(board_info_idx);
         attributes.addAttribute("board_info_idx", board_info_idx);
         attributes.addAttribute("content_idx", content_idx);
+        attributes.addAttribute("page", page);
 
         boardService.modifyContentInfo(content);
         return "redirect:/board/read";
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam int board_info_idx, @RequestParam int content_idx,
+    public String delete(@RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page,
                          @ModelAttribute Content content,
                          Model model,
                          RedirectAttributes attributes) {
@@ -122,7 +135,8 @@ public class BoardController {
         boardService.deleteContentInfo(content_idx);
 
         attributes.addAttribute("board_info_idx", board_info_idx);
+        attributes.addAttribute("page", page);
 
-        return "/board/main";
+        return "redirect:/board/main";
     }
 }

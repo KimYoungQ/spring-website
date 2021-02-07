@@ -16,6 +16,7 @@
                     <div class="card-body">
                         <form th:action="@{/board/write}" method="post" th:object="${content}" enctype="multipart/form-data">
                             <input type='hidden' name="board_info_idx" th:value="${board_info_idx}"/>
+                            <input type='hidden' name="page" th:value="${page}"/>
                             <div class="form-group pb-3">
                                 <label for="board_subject">제목</label>
                                 <input type="text" id="board_subject" th:field="*{content_subject}" class="form-control"/>

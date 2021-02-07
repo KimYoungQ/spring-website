@@ -2,6 +2,7 @@ package com.springwebsite.board;
 
 import com.springwebsite.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,11 +33,15 @@ public class BoardDao {
         return boardMapper.findContentIdxbyContentDate(content_date);
     }
 
-    public List<Content> getContentList(int board_info_idx) {
-        return boardMapper.getContentList(board_info_idx);
+    public List<Content> getContentList(int board_info_idx, RowBounds rowBounds) {
+        return boardMapper.getContentList(board_info_idx, rowBounds);
     }
 
     public void deleteContentInfo(int content_idx) {
         boardMapper.deleteContentInfo(content_idx);
+    }
+
+    public int getContentCount(int content_board_idx) {
+        return boardMapper.getContentCount(content_board_idx);
     }
 }

@@ -2,6 +2,7 @@ package com.springwebsite.mapper;
 
 import com.springwebsite.board.Content;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public interface BoardMapper {
     @Insert("insert into content_table(content_idx, content_subject, content_text, " +
             "       content_file, content_writer_idx, content_board_idx, content_date) " +
             "values (#{content_idx}, #{content_subject}, #{content_text}, " +
-            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, to_date(sysdate,'yyyy-mm-dd hh24:mi:ss'))")
+            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate)")
     void addContentInfo(Content content);
 
     @Delete("delete from content_table")
@@ -46,8 +47,11 @@ public interface BoardMapper {
             "where a1.content_writer_idx = a2.member_idx " +
             "       and a1.content_board_idx = #{board_info_idx} " +
             "order by a1.content_idx desc")
-    List<Content> getContentList(int board_info_idx);
+    List<Content> getContentList(int board_info_idx, RowBounds rowBounds);
 
     @Delete("delete from content_table where content_idx = #{content_idx}")
     void deleteContentInfo(int content_idx);
+
+    @Select("select count(*) from content_table where content_board_idx = #{content_board_idx}")
+    int getContentCount(int content_board_idx);
 }

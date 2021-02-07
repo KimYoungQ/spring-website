@@ -1,7 +1,10 @@
 package com.springwebsite.board;
 
 import com.springwebsite.member.MemberDao;
+import com.springwebsite.setting.Paging;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +18,13 @@ public class BoardService {
 
     private final BoardDao boardDao;
     private final MemberDao memberDao;
+
+    @Value("${page.listCount}")
+    private int PAGE_LISTCOUNT;
+
+    @Value("${page.paginationCount}")
+    private int PAGE_PAGINATIONCOUNT;
+
 
     private static final String FILE_PATH = "C:/spring/springwebsite/src/main/resources/static/images/";
 
@@ -73,11 +83,22 @@ public class BoardService {
         return boardDao.findContentIdxbyContentDate(content_date);
     }
 
-    public List<Content> getContentList(int board_info_idx) {
-        return boardDao.getContentList(board_info_idx);
+    public List<Content> getContentList(int board_info_idx, int page) {
+
+        int start = (page -1) * PAGE_LISTCOUNT;
+        RowBounds rowBounds = new RowBounds(start, PAGE_LISTCOUNT);
+        return boardDao.getContentList(board_info_idx, rowBounds);
     }
 
     public void deleteContentInfo(int content_idx) {
         boardDao.deleteContentInfo(content_idx);
+    }
+
+    public Paging getContentCount(int content_board_idx, int currentPage) {
+
+        int contentCount = boardDao.getContentCount(content_board_idx);
+        Paging paging = new Paging(contentCount, currentPage, PAGE_LISTCOUNT, PAGE_PAGINATIONCOUNT);
+
+        return paging;
     }
 }

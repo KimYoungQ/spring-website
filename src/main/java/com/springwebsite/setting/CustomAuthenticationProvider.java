@@ -1,4 +1,4 @@
-package com.springwebsite.config;
+package com.springwebsite.setting;
 
 import com.springwebsite.member.MemberService;
 import com.springwebsite.member.UserMember;
