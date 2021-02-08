@@ -21,5 +21,9 @@ public class MemberDao {
     public void deleteAll() {
         memberMapper.deleteAll();
     }
+
+    public String existById(String id) {
+        return memberMapper.existById(id);
+    }
 }
 

@@ -37,10 +37,10 @@
                                 <small class="form-text text-danger" th:if="${#fields.hasErrors('content_text')}" th:errors="*{content_text}">Text Error</small>
                             </div>
                             <div class="form-group pb-3">
+                                <label for="board_file">첨부 이미지</label>
                                 <th:block th:if="${content.content_file != null}">
-                                    <label for="board_file">첨부 이미지</label>
                                     <img th:src="@{'/images/' + ${content.content_file}}" width="100%"/>
-                                    <form th:hidden="${content.content_file}"></form>
+                                    <input type='hidden' name="content_file" th:value="${content.content_file}"/>
                                 </th:block>
                                 <input type="file" id="board_file" th:field="*{upload_file}" class="form-control" accept="image/*"/>
                             </div>

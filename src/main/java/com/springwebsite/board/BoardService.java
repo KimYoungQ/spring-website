@@ -7,10 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -27,15 +29,15 @@ public class BoardService {
     @Value("${page.paginationCount}")
     private int PAGE_PAGINATIONCOUNT;
 
-
-    private static final String FILE_PATH = "C:/spring/springwebsite/src/main/resources/static/images/";
-
-    public String saveUploadFile(MultipartFile upload_file) {
+    public String saveUploadFile(MultipartFile upload_file) throws IOException {
 
         String file_name = System.currentTimeMillis() + "_" + upload_file.getOriginalFilename();
 
+        String path = new ClassPathResource("/static/images").getFile().getAbsolutePath() + "\\";
+        String resultPath = path.substring(0, path.lastIndexOf("target\\")) + "src\\main\\resources\\static\\images\\";
+
         try {
-            upload_file.transferTo(new File(FILE_PATH + file_name));
+            upload_file.transferTo(new File(resultPath + file_name));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +49,7 @@ public class BoardService {
         return boardDao.getBoardInfoName(board_info_idx);
     }
 
-    public void addContentInfo(Content content, String memberId) {
+    public void addContentInfo(Content content, String memberId) throws IOException {
 
         Content addContent = addContentWriterIndex(content, memberId);
         addContent = addContentFile(content);
@@ -56,7 +58,7 @@ public class BoardService {
 
     }
 
-    private Content addContentFile(Content content) {
+    private Content addContentFile(Content content) throws IOException {
         MultipartFile upload_file = content.getUpload_file();
 
         if (upload_file == null) {
@@ -81,7 +83,9 @@ public class BoardService {
         return boardDao.getContentInfo(content_idx);
     }
 
-    public void modifyContentInfo(Content content) {
+    public void modifyContentInfo(Content content, String memberId) throws IOException {
+        Content addContent = addContentWriterIndex(content, memberId);
+        addContent = addContentFile(content);
         boardDao.modifyContentInfo(content);
     }
 

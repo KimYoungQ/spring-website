@@ -59,4 +59,8 @@ public class MemberService implements UserDetailsService {
     public Member findById(String id) {
         return memberDao.findById(id);
     }
+
+    public String existById(String id) {
+        return memberDao.existById(id);
+    }
 }

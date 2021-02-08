@@ -21,4 +21,6 @@ public interface MemberMapper {
     @Delete("delete from member_table")
     void deleteAll();
 
+    @Select("select id from member_table where id = #{id}")
+    String existById(String id);
 }

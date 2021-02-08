@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.model.IModel;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class BoardController {
     public String write(@Valid @ModelAttribute Content content, Errors errors,
                         @RequestParam int board_info_idx, @RequestParam int page, Model model,
                         Principal principal,
-                        RedirectAttributes attributes) {
+                        RedirectAttributes attributes) throws IOException {
         if(errors.hasErrors()) {
             model.addAttribute("board_info_idx", board_info_idx);
             model.addAttribute("page", page);
@@ -106,7 +107,8 @@ public class BoardController {
     public String modify(@Valid @ModelAttribute Content content, Errors errors,
                          RedirectAttributes attributes,
                          @RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page,
-                         Model model) {
+                         Principal principal,
+                         Model model) throws IOException {
         if (errors.hasErrors()) {
             model.addAttribute("board_info_idx", board_info_idx);
             model.addAttribute("content_idx", content_idx);
@@ -120,7 +122,8 @@ public class BoardController {
         attributes.addAttribute("content_idx", content_idx);
         attributes.addAttribute("page", page);
 
-        boardService.modifyContentInfo(content);
+        String memberId = principal.getName();
+        boardService.modifyContentInfo(content, memberId);
         return "redirect:/board/read";
     }
 
