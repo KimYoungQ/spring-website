@@ -40,4 +40,8 @@ public class BoardDao {
     public int getContentCount(int content_board_idx) {
         return boardMapper.getContentCount(content_board_idx);
     }
+
+    public int getContextWriterIndexByContentIndex(int content_idx) {
+        return boardMapper.getContextWriterIndexByContentIndex(content_idx);
+    }
 }

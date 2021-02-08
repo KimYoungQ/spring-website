@@ -1,17 +1,13 @@
 package com.springwebsite.board;
 
-import com.springwebsite.member.Member;
-import com.springwebsite.member.UserMember;
-import com.springwebsite.navMenu.NavMenuService;
+import com.springwebsite.member.MemberService;
 import com.springwebsite.setting.Paging;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.model.IModel;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -23,8 +19,8 @@ import java.util.List;
 @RequestMapping("/board")
 public class BoardController {
 
-    private final NavMenuService navMenuService;
     private final BoardService boardService;
+    private final MemberService memberService;
 
     @GetMapping("/main")
     public String main(Model model, @RequestParam int board_info_idx, @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -46,16 +42,30 @@ public class BoardController {
     }
 
     @GetMapping("/read")
-    public String read(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page) {
+    public String read(Model model, @RequestParam int board_info_idx, @RequestParam int content_idx, @RequestParam int page,
+                       Principal principal) {
 
         model.addAttribute("board_info_idx", board_info_idx);
         model.addAttribute("content_idx", content_idx);
         model.addAttribute("page", page);
+        model.addAttribute("principal", principal);
 
         Content content = boardService.getContentInfo(content_idx);
         model.addAttribute("content", content);
 
+        boolean matchResult = matchCurrentUserAndWriterUser(content_idx, principal);
+        model.addAttribute("matchResult", matchResult);
+
         return "/board/read";
+    }
+
+    private boolean matchCurrentUserAndWriterUser(int content_idx, Principal principal) {
+
+        String principalName = principal.getName();
+        int writerIndex = boardService.getContextWriterIndexByContentIndex(content_idx);
+        String writerName = memberService.findWriterNameByContentWriterIndex(writerIndex);
+
+        return principalName.equals(writerName);
     }
 
     @GetMapping("/write")

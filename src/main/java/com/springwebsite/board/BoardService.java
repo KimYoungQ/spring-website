@@ -107,4 +107,8 @@ public class BoardService {
 
         return paging;
     }
+
+    public int getContextWriterIndexByContentIndex(int content_idx) {
+        return boardDao.getContextWriterIndexByContentIndex(content_idx);
+    }
 }

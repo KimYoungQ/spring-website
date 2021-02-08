@@ -63,4 +63,8 @@ public class MemberService implements UserDetailsService {
     public String existById(String id) {
         return memberDao.existById(id);
     }
+
+    public String findWriterNameByContentWriterIndex(int content_idx) {
+        return memberDao.findWriterNameByContentWriterIndex(content_idx);
+    }
 }

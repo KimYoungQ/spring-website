@@ -23,4 +23,7 @@ public interface MemberMapper {
 
     @Select("select id from member_table where id = #{id}")
     String existById(String id);
+
+    @Select("select id from member_table where member_idx = #{content_idx}")
+    String findWriterNameByContentWriterIndex(int content_idx);
 }

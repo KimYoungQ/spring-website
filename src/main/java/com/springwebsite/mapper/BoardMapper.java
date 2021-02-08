@@ -51,4 +51,7 @@ public interface BoardMapper {
 
     @Select("select count(*) from content_table where content_board_idx = #{content_board_idx}")
     int getContentCount(int content_board_idx);
+
+    @Select("select content_writer_idx from content_table where content_idx = #{content_idx}")
+    int getContextWriterIndexByContentIndex(int content_idx);
 }

@@ -25,5 +25,9 @@ public class MemberDao {
     public String existById(String id) {
         return memberMapper.existById(id);
     }
+
+    public String findWriterNameByContentWriterIndex(int content_idx) {
+        return memberMapper.findWriterNameByContentWriterIndex(content_idx);
+    }
 }
 
