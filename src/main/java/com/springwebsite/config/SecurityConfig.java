@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers("/", "/join", "/member/join", "/login", "/board/main", "/board/read").permitAll()
+                .mvcMatchers("/", "/join", "/member/join", "/login", "/board/main", "/board/read", "/resources/**").permitAll()
                 .anyRequest().authenticated();
         http.formLogin()
                 .loginPage("/login")
@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
+                .antMatchers("/error")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 }
