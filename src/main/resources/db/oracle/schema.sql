@@ -1,13 +1,3 @@
-create sequence member_seq
-start with 0
-increment by 1
-minvalue 0;
-
-create sequence content_seq
-start with 0
-increment by 1
-minvalue 0;
-
 create table board_info_table(
 	board_info_idx number constraint BOARD_INFO_PK primary key,
 	board_info_name varchar2(500) not null
