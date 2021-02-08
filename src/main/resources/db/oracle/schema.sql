@@ -20,5 +20,5 @@ create table content_table(
 	                   constraint CONTENT_FK1 references member_table(member_idx),
 	content_board_idx number not null
 	                   constraint CONTENT_FK2 references board_info_table(board_info_idx),
-	content_date date not null,
+	content_date date not null
 );
