@@ -27,7 +27,7 @@
                     <div class="form-group mb-3">
                         <label for="member_password">비밀번호</label>
                         <input id="member_password" type="password" th:field="*{password}" class="form-control"
-                               placeholder="아이디" aria-describedby="password1Help" required minlength="8" maxlength="16">
+                               placeholder="비밀번호" aria-describedby="password1Help" required minlength="8" maxlength="16">
                         <small id="password1Help" class="form-text text-muted">
                             8~16자의 영문 대 소문자, 숫자만 사용가능합니다.
                         </small>
@@ -37,14 +37,14 @@
                     <div class="form-group mb-4">
                         <label for="member_password_confirm">비밀번호 확인</label>
                         <input id="member_password_confirm" type="password" th:field="*{passwordConfirm}" class="form-control"
-                               placeholder="아이디" aria-describedby="password2Help" required minlength="8" maxlength="16">
+                               placeholder="비밀번호 확인" aria-describedby="password2Help" required minlength="8" maxlength="16">
                         <small class="invalid-feedback">비밀번호를 다시 입력하세요.</small>
                         <div class="form-text text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Password Error</div>
                     </div>
                     <div class="form-group mb-4">
                         <label for="member_name">이름</label>
                         <input id="member_name" type="text" th:field="*{name}" class="form-control"
-                               placeholder="아이디" aria-describedby="nameHelp" required minlength="1" maxlength="20">
+                               placeholder="이름" aria-describedby="nameHelp" required minlength="1" maxlength="20">
                         <small class="invalid-feedback">이름을 다시 입력하세요.</small>
                         <div class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
                     </div>
