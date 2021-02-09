@@ -1,8 +1,19 @@
 # Spring-website
 
-## 스프링과 Mybatis기반 웹 애플리케이션입니다.
- 
-
+## 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
+    이 웹 애플리케이션은 주로 회원관리와 게시판 관리를 구현합니다. 
+    
+    다루는 툴 :     
+        * IntelliJ IDEA
+        * 부트스트랩
+        * Thymeleaf
+        * 스프링 부트
+        * 스프링 시큐리티
+        * 오라클
+        * 마이바티스
+        * 메이븐
+        
+    
 ## 로컬에서 실행
 
 ### application.properties에서 설정
@@ -26,5 +37,5 @@
     ```
     spring.datasource.initialization-mode = never
     ```
-    애플리케이션 최초 실행시 `never`를 `always`로 수정해주세요. 그 후 반드시 `never`로 수정 해주셔야 됩니다. (에러시 해당 오라클 계정의 데이터 모두 삭제 후 재실행)
+    애플리케이션 최초 실행시에만 `never`를 `always`로 수정해주세요. 그 후 반드시 `never`로 수정 해주셔야 됩니다. (에러시 해당 오라클 계정의 데이터 모두 삭제 후 재실행)
     
