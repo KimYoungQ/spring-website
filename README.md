@@ -1,6 +1,9 @@
 # Spring-website
 
-## 로컬에서 구동시
+## 스프링과 Mybatis기반 웹 애플리케이션입니다.
+ 
+
+## 로컬에서 실행
 
 ### application.properties에서 설정
 
