@@ -23,5 +23,5 @@
     ```
     spring.datasource.initialization-mode = never
     ```
-    애플리케이션 최초 실행시 `never`를 `always`로 수정해주세요. 그 후 반드시 `never`로 수정 해주셔야 됩니다. (에러시 해당 오라클 계정에 들어가나 데이터 모두 삭제 후 재실행)
+    애플리케이션 최초 실행시 `never`를 `always`로 수정해주세요. 그 후 반드시 `never`로 수정 해주셔야 됩니다. (에러시 해당 오라클 계정의 데이터 모두 삭제 후 재실행)
     
