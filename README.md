@@ -3,6 +3,10 @@
 ## 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
 
 ![홈페이지화면](https://user-images.githubusercontent.com/45932388/107321246-88cb1e00-6ae5-11eb-9e60-141b62be0a6c.PNG)
+![회원가입_페이지](https://user-images.githubusercontent.com/45932388/108797703-2a1a9f80-75cf-11eb-8e4c-61a9538a5b66.PNG)
+![게시판main_페이지](https://user-images.githubusercontent.com/45932388/108797721-34d53480-75cf-11eb-8dc1-4bfbd61d648e.PNG)
+![게시글read_페이지](https://user-images.githubusercontent.com/45932388/108797728-3b63ac00-75cf-11eb-8690-8a556f893ba0.PNG)
+
 
     이 웹 애플리케이션은 주로 회원관리와 여러 게시판 관리를 구현합니다. 
     
