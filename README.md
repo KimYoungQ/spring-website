@@ -10,16 +10,18 @@
 
     이 웹 애플리케이션은 주로 회원관리와 여러 게시판 관리를 구현합니다. 
     
-    다루는 툴 :     
-        * IntelliJ IDEA
-        * 부트스트랩
-        * Thymeleaf
-        * 스프링 부트
-        * 스프링 시큐리티
-        * 오라클
-        * 마이바티스
-        * junit5
-        * 메이븐
+    - Web backend(Java, Spring framework, Oracle)
+    - Web frontend(HTML, CSS, Bootstrap, Thymeleaf)
+    - Spring Boot사용, MyBatis Oracle연동
+    - Spring Security
+        · 사용자 인증 및 권한 부여
+        · 로그인 커스텀 페이지
+        · 권한에 따른 페이지 접근 제한
+        · 현재 로그인 사용자 정보 참조 게시판 CRUD 기능 제한
+    - 게시판
+        · CRUD 및 이미지 첨부
+        · 페이징
+    - Junit5 단위 테스트 구현
         
     
 ## 로컬에서 실행
