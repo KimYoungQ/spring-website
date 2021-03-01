@@ -7,8 +7,7 @@
 ![게시판main_페이지](https://user-images.githubusercontent.com/45932388/108797721-34d53480-75cf-11eb-8dc1-4bfbd61d648e.PNG)
 ![게시글read_페이지](https://user-images.githubusercontent.com/45932388/108797728-3b63ac00-75cf-11eb-8690-8a556f893ba0.PNG)
 
-
-    이 웹 애플리케이션은 주로 회원관리와 여러 게시판 관리를 구현합니다. 
+    사용자 인증을 통한 게시판 CRUD 웹 애플리케션입니다.
     
     - Web backend(Java, Spring framework, Oracle)
     - Web frontend(HTML, CSS, Bootstrap, Thymeleaf)
