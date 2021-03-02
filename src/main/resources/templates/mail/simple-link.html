@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <p>안녕하세요, <span th:text="${name}"></span>님</p>
+
+        <p th:text="${message}">메세지</p>
+
+        <div>
+            <a th:href="${host + link}" th:text="${linkName}">Link</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -29,5 +29,10 @@ public class MemberValidator implements Validator {
         if(memberService.existById(signUpForm.getId()) != null) {
             errors.rejectValue("id", "invalid.id", "이미 존재하는 ID입니다.");
         }
+
+        if(memberService.existByEmail(signUpForm.getEmail()) != null) {
+            errors.rejectValue("email", "invalid.email", "이미 존재하는 이메일입니다.");
+        }
+
     }
 }

@@ -2,6 +2,8 @@ package com.springwebsite.member;
 
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -21,8 +23,22 @@ public class Member {
 
     private String role;
 
+    private String email;
+
+    private String emailCheckToken;
+
+    private String emailVerified;
+
     public Member(String id, String password) {
         this.id = id;
         this.password =password;
+    }
+
+    public void generateEmailCheckToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+    }
+
+    public boolean isValidToken(String token) {
+        return this.emailCheckToken.equals(token);
     }
 }

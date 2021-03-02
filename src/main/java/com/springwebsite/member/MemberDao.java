@@ -18,6 +18,10 @@ public class MemberDao {
         return memberMapper.findById(id);
     }
 
+    public Member findByEmail(String email) {
+        return memberMapper.findByEmail(email);
+    }
+
     public void deleteAll() {
         memberMapper.deleteAll();
     }
@@ -26,8 +30,20 @@ public class MemberDao {
         return memberMapper.existById(id);
     }
 
+    public String existByEmail(String email) {
+        return memberMapper.existByEmail(email);
+    }
+
     public String findWriterNameByContentWriterIndex(int content_idx) {
         return memberMapper.findWriterNameByContentWriterIndex(content_idx);
+    }
+
+    public void updateEmailVerified(String emailVerified) {
+        memberMapper.updateEmailVerified(emailVerified);
+    }
+
+    public Boolean isEmailVerifiedById(String id) {
+        return memberMapper.isEmailVerifiedById(id);
     }
 }
 

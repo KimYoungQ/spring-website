@@ -8,7 +8,10 @@ create table member_table(
 	name varchar2(50) not null,
 	id varchar2(100) not null,
 	password varchar2(100) not null,
-	role varchar2(50) not null
+	role varchar2(50) not null,
+	email varchar2(100) not null,
+	emailCheckToken varchar2(100) not null,
+	emailVerified char(1) not null
 );
 
 create table content_table(

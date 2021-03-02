@@ -4,6 +4,10 @@
 <head th:replace="fragments.html :: head"></head>
 <body class="bg-light">
     <div th:replace="fragments.html :: navbar"></div>
+    <div class="alert alert-warning" role="alert" th:if="${memberId != null && !emailVerified}" sec:authorize="isAuthenticated()">
+        가입을 완료하려면 <a href="#" th:href="@{/check-email}" class="alert-link">계정 인증 이메일을 확인</a>하세요.
+    </div>
+
 
     <div class="p-md-5 mb-4 text-white rounded bg-dark" >
         <div class="col-md-6 px-0" sec:authorize="!isAuthenticated()">
