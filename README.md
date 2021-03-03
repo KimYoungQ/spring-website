@@ -2,6 +2,9 @@
 
 ## 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
 
+프로젝트 ppt
+[웹프로젝트_김영규.pptx](https://github.com/KimYoungQ/spring-website/files/6073108/_.pptx)
+
 ![회원가입화면](https://user-images.githubusercontent.com/45932388/109648124-93854a00-7b9d-11eb-9760-706daf8ce0cb.PNG)
 ![메인](https://user-images.githubusercontent.com/45932388/109648263-c3345200-7b9d-11eb-91f4-dad94d70cca0.PNG)
 ![로그인](https://user-images.githubusercontent.com/45932388/109660589-63917300-7bac-11eb-9994-ff9f6e9eb033.PNG)
