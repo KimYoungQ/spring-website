@@ -2,9 +2,7 @@
 
 아래의 ppt를 참고해 주세요
 
-[웹프로젝트_김영규.pptx](https://github.com/KimYoungQ/spring-website/files/6073108/_.pptx)
-![웹프로젝트_김영규.pdf](https://github.com/KimYoungQ/spring-website/files/6073147/_.pdf)
-
+[웹프로젝트_김영규.pdf](https://github.com/KimYoungQ/spring-website/files/6073147/_.pdf)
 
 ## 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
 
