@@ -27,6 +27,7 @@ public class WithSecurityContextFacotry implements WithSecurityContextFactory<Wi
         signUpForm.setId(id);
         signUpForm.setPassword("12345678");
         signUpForm.setName("테스트용");
+        signUpForm.setEmail("test@email.com");
         Member member = memberService.createNewMember(signUpForm);
 
         UserDetails principal = memberService.loadUserByUsername(id);
