@@ -3,6 +3,7 @@
 아래의 ppt를 참고해 주세요
 
 [웹프로젝트ppt_김영규.pdf](https://github.com/KimYoungQ/spring-website/files/6073147/_.pdf)
+
 (2021.03.06 mail 인증 관련 버그 수정.)
 
 ## 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
