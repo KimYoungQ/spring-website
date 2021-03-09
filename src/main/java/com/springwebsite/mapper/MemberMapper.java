@@ -17,7 +17,7 @@ public interface MemberMapper {
     Member findByEmail(String email);
 
     @Insert("Insert into member_table (member_idx, id, password, name, role, email, emailCheckToken, emailVerified) " +
-            "values (member_seq.nextval, #{id}, #{password}, #{name}, #{role}, #{email}, #{emailCheckToken}, #{emailVerified})")
+            "values (NEXTVAL(member_seq), #{id}, #{password}, #{name}, #{role}, #{email}, #{emailCheckToken}, #{emailVerified})")
     void save(Member newMember);
 
     @Delete("delete from member_table")

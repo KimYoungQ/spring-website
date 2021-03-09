@@ -15,7 +15,7 @@ public interface BoardMapper {
     String getBoardInfoName(int board_info_idx);
 
     @Select("select a2.name as content_writer_name, " +
-            "       to_char(a1.content_date, 'yyyy-mm-dd hh24:mi:ss') as content_date, " +
+            "       DATE_FORMAT(a1.content_date, '%Y-%m-%d %H:%i:%s %p') as content_date, " +
             "       a1.content_subject, a1.content_text, a1.content_file, a1.content_writer_idx " +
             "from content_table a1, member_table a2 " +
             "where a1.content_writer_idx = a2.member_idx " +
@@ -28,18 +28,18 @@ public interface BoardMapper {
             "where content_idx = #{content_idx}")
     void modifyContentInfo(Content content);
 
-    @SelectKey(statement = "select content_seq.nextval from dual", keyProperty = "content_idx", before = true, resultType = int.class)
+    @SelectKey(statement = "select NEXTVAL(content_seq) from dual", keyProperty = "content_idx", before = true, resultType = int.class)
     @Insert("insert into content_table(content_idx, content_subject, content_text, " +
             "       content_file, content_writer_idx, content_board_idx, content_date) " +
             "values (#{content_idx}, #{content_subject}, #{content_text}, " +
-            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate)")
+            "       #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, NOW())")
     void addContentInfo(Content content);
 
     @Delete("delete from content_table")
     void deleteAll();
 
     @Select("select a1.content_idx, a1.content_subject, a2.name as content_writer_name, " +
-            "       to_char(a1.content_date, 'YYYY-MM-DD hh24:mi:ss') as content_date " +
+            "       DATE_FORMAT(a1.content_date, '%Y-%m-%d %H:%i:%s %p') as content_date " +
             "from content_table a1, member_table a2 " +
             "where a1.content_writer_idx = a2.member_idx " +
             "       and a1.content_board_idx = #{board_info_idx} " +
