@@ -4,8 +4,6 @@
 
 [웹프로젝트ppt_김영규.pdf](https://github.com/KimYoungQ/spring-website/files/6073147/_.pdf)
 
-(2021.03.06 구글 SMTP 인증 에러 수정.)
-
 ## 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
 
 ![회원가입화면](https://user-images.githubusercontent.com/45932388/109648124-93854a00-7b9d-11eb-9760-706daf8ce0cb.PNG)
