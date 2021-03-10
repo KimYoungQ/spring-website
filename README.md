@@ -3,7 +3,7 @@ AWS EC2 Spring-website
 
 [AWS EC2 Spring-website 웹사이트 바로가기](http://ec2-52-78-48-191.ap-northeast-2.compute.amazonaws.com:8090/)
 
-아래의 ppt를 참고해 주세요
+아래의 파일을 참고해 주세요
 
 [웹프로젝트ppt_김영규.pdf](https://github.com/KimYoungQ/study/files/6116016/ppt_.pdf)
 
