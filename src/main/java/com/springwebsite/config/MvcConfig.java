@@ -23,6 +23,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {     // 서버 재시작 없이 정적 리소스 자원 리로드.
         registry.addResourceHandler("/**")
-                .addResourceLocations("file:src/main/resources/templates/", "file:src/main/resources/static/");
+                .addResourceLocations("file:src/main/resources/templates/", "file:src/main/resources/static/", "file:///home/ec2-user/app/step1/spring-website/src/main/resources/static/");
     }
 }
