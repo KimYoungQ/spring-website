@@ -38,7 +38,7 @@ public class BoardController {
 
         model.addAttribute("page", page);
 
-        return "/board/main";
+        return "board/main";
     }
 
     @GetMapping("/read")
@@ -56,7 +56,7 @@ public class BoardController {
         boolean matchResult = matchCurrentUserAndWriterUser(content_idx, principal);
         model.addAttribute("matchResult", matchResult);
 
-        return "/board/read";
+        return "board/read";
     }
 
     private boolean matchCurrentUserAndWriterUser(int content_idx, Principal principal) {
@@ -74,7 +74,7 @@ public class BoardController {
         model.addAttribute(new Content());
         model.addAttribute("board_info_idx", board_info_idx);
         model.addAttribute("page", page);
-        return "/board/write";
+        return "board/write";
     }
 
     @PostMapping("/write")
@@ -85,7 +85,7 @@ public class BoardController {
         if(errors.hasErrors()) {
             model.addAttribute("board_info_idx", board_info_idx);
             model.addAttribute("page", page);
-            return "/board/write";
+            return "board/write";
         }
 
 
@@ -110,7 +110,7 @@ public class BoardController {
         Content contentInfo = boardService.getContentInfo(content_idx);
         model.addAttribute("content", contentInfo);
 
-        return "/board/modify";
+        return "board/modify";
     }
 
     @PostMapping("/modify")
@@ -124,7 +124,7 @@ public class BoardController {
             model.addAttribute("content_idx", content_idx);
             model.addAttribute("page",  page);
             model.addAttribute("content", content);
-            return "/board/modify";
+            return "board/modify";
         }
 
         content.setContent_board_idx(board_info_idx);
