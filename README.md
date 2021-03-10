@@ -14,7 +14,7 @@ AWS EC2 Spring-website
 
     AWS EC2 서버 웹 애플리케이션 개발
     
-    - AWS EC2 서버 구축 및 RDS
+    - AWS EC2 서버 구축 및 RDS 연동
     - Web backend(Java, Spring framework, MariaDB)
     - Web frontend(HTML, CSS, Bootstrap, Thymeleaf)
     - Spring Boot, MyBatis ORM framework
