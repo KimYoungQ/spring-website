@@ -12,7 +12,7 @@ AWS EC2 Spring-website
 스프링부트와 Mybatis기반 웹 애플리케이션입니다.
 ---
 
-    AWS EC2서버 웹 애플리케이션 개발
+    AWS EC2 서버 웹 애플리케이션 개발
     
     - AWS EC2 서버 구축 및 RDS
     - Web backend(Java, Spring framework, MariaDB)
