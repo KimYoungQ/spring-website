@@ -29,22 +29,6 @@ public class BoardService {
     @Value("${page.paginationCount}")
     private int PAGE_PAGINATIONCOUNT;
 
-    public String saveUploadFile(MultipartFile upload_file) throws IOException {
-
-        String file_name = System.currentTimeMillis() + "_" + upload_file.getOriginalFilename();
-
-        String path = new ClassPathResource("/static/images").getFile().getAbsolutePath() + "\\";
-        String resultPath = path.substring(0, path.lastIndexOf("target\\")) + "src\\main\\resources\\static\\images\\";
-
-        try {
-            upload_file.transferTo(new File(resultPath + file_name));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return file_name;
-    }
-
     public String getBoardInfoName(int board_info_idx) {
         return boardDao.getBoardInfoName(board_info_idx);
     }
@@ -58,17 +42,7 @@ public class BoardService {
 
     }
 
-    private Content addContentFile(Content content) throws IOException {
-        MultipartFile upload_file = content.getUpload_file();
-
-        if (upload_file == null) {
-            return content;         // test 코드 NullPointException 방지
-        }
-        else if (upload_file.getSize() > 0) {
-            String file_name = saveUploadFile(upload_file);
-            content.setContent_file(file_name);
-        }
-
+    private Content addContentFile(Content content) {
         return content;
     }
 

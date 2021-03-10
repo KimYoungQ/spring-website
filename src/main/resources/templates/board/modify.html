@@ -37,14 +37,6 @@
                                 <small class="form-text text-danger" th:if="${#fields.hasErrors('content_text')}" th:errors="*{content_text}">Text Error</small>
                             </div>
                             <div class="form-group pb-3">
-                                <label for="board_file">첨부 이미지</label>
-                                <th:block th:if="${content.content_file != null}">
-                                    <img th:src="@{'/images/' + ${content.content_file}}" width="100%"/>
-                                    <input type='hidden' name="content_file" th:value="${content.content_file}"/>
-                                </th:block>
-                                <input type="file" id="board_file" th:field="*{upload_file}" class="form-control" accept="image/*"/>
-                            </div>
-                            <div class="form-group pb-3">
                                 <div class="text-right gap-2 d-md-flex justify-content-md-end">
                                     <button type="submit" class="btn btn-outline-success me-md-2">수정완료</button>
                                     <a th:href="@{/board/read(board_info_idx=${board_info_idx}, content_idx=${content_idx}, page=${page})}" class="btn btn-outline-danger me0md-2">취소</a>

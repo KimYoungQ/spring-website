@@ -105,11 +105,15 @@ class BoardControllerTest {
     @WithMockCustomUser("testID")
     @Test
     void modify() throws Exception {
+        Content content = createContent("testID");
+        boardService.addContentInfo(content, "testID");
+
+        String str_content_idx = intToStringContentIdx(content);
 
         mockMvc.perform(post("/board/modify")
                 .param("board_info_idx", "1")
                 .param("page", "1")
-                .param("content_idx", "1")
+                .param("content_idx", str_content_idx)
                 .param("content_subject", "제목자리")
                 .param("content_text", "내용자리")
                 .param("content_writer_name", "테스트")

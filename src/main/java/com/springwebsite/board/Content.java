@@ -38,6 +38,4 @@ public class Content {
     private String content_musicBoard_idx;
 
     private String content_sportBoard_idx;
-
-    private MultipartFile upload_file;
 }

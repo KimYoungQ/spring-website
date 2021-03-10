@@ -51,6 +51,7 @@ public class BoardController {
         model.addAttribute("principal", principal);
 
         Content content = boardService.getContentInfo(content_idx);
+
         model.addAttribute("content", content);
 
         boolean matchResult = matchCurrentUserAndWriterUser(content_idx, principal);
@@ -66,6 +67,7 @@ public class BoardController {
         String writerName = memberService.findWriterNameByContentWriterIndex(writerIndex);
 
         return principalName.equals(writerName);
+
     }
 
     @GetMapping("/write")
