@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<body class="bg-light">
 
     <div th:replace="fragments.html :: navbar"></div>
 
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
-                <div class="card shadow">
+                <div class="card border-secondary mb-3 shadow">
                     <div class="card-body">
                         <form th:action="@{/board/write}" method="post" th:object="${content}" enctype="multipart/form-data">
                             <input type='hidden' name="board_info_idx" th:value="${board_info_idx}"/>

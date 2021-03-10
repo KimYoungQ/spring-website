@@ -30,7 +30,12 @@
                             <span>가입된 아이디 또는 비밀번호가 아닙니다. 다시 한번 입력해 주세요.</span>
                         </div>
 
-                    <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">로그인</button>
+                        <div>
+                            <button class="w-100 btn btn-primary btn-lg mt-4" type="submit" aria-describedby="submitHelp">로그인</button>
+                            <small id="submitHelp" class="form-text text-muted">
+                                이 사이트를 이용하실려면 <a th:href="@{/join}">계정을 먼저 만드세요.</a>
+                            </small>
+                        </div>
                     </div>
                 </form>
             </div>
