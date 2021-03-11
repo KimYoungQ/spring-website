@@ -26,6 +26,8 @@ AWS EC2 Spring-website
         · 권한에 따른 페이지 접근 제한
         · 현재 로그인 사용자 정보 참조 게시판 CRUD 기능 제한
     - 메일 인증을 통한 가입 관리
+        · 구글 SMTP 
+	    · MimeMessage 통해 html 메일 전송
     - 게시판
         · CRUD 및 이미지 첨부
         · 페이징
